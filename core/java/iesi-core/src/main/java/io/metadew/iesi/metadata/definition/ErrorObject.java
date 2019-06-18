@@ -10,7 +10,7 @@ public class ErrorObject {
     // short description of the error, what might have cause it and possibly a
     // fixing proposal
     private String link;
-    // points to an online resource, where more details can be found about the
+    // points to an online resources, where more details can be found about the
     // error
     private String detail;
     // detailed message, containing additional data that might be relevant to

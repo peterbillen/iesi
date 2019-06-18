@@ -25,24 +25,22 @@ public class FrameworkLog {
     private ArrayList<String> encryptionRedactionList;
     private ArrayList<RedactionSource> redactionList;
 
-    public FrameworkLog(FrameworkConfiguration frameworkConfiguration, FrameworkExecutionContext frameworkExecutionContext, FrameworkControl frameworkControl, FrameworkCrypto frameworkCrypto, FrameworkRuntime frameworkRuntime) {
+    public FrameworkLog(FrameworkConfiguration frameworkConfiguration, FrameworkExecutionContext frameworkExecutionContext,
+                        FrameworkControl frameworkControl, FrameworkCrypto frameworkCrypto, FrameworkRuntime frameworkRuntime) {
         if (frameworkExecutionContext == null) {
-            Context context = new Context();
-            context.setName("");
-            context.setScope("");
-            this.setExecutionContext(new FrameworkExecutionContext(context));
+            this.setExecutionContext(new FrameworkExecutionContext(new Context("", "")));
         } else {
             this.setExecutionContext(frameworkExecutionContext);
         }
 
         // Initialize password redaction
-        this.setEncryptionRedactionList(new ArrayList<String>());
-        this.setRedactionList(new ArrayList<RedactionSource>());
+        this.setEncryptionRedactionList(new ArrayList<>());
+        this.setRedactionList(new ArrayList<>());
 
         // Get to work
-        this.setFrameworkRuntime(frameworkRuntime);
-        this.setFrameworkConfiguration(frameworkConfiguration);
-        this.setFrameworkCrypto(frameworkCrypto);
+        this.frameworkRuntime =frameworkRuntime;
+        this.frameworkConfiguration = frameworkConfiguration;
+        this.frameworkCrypto = frameworkCrypto;
         System.setProperty("log4j.configurationFile",
                 this.getFrameworkConfiguration().getFolderConfiguration().getFolderAbsolutePath("conf") + File.separator
                         + this.getFrameworkConfiguration().getFrameworkCode() + "-log4j2-cli.xml");

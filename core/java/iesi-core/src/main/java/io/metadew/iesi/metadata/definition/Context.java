@@ -12,7 +12,11 @@ public class Context {
 
     // Constructors
     public Context() {
+    }
 
+    public Context(String name, String scope) {
+        this.name = name;
+        this.scope = scope;
     }
 
     // Getters and Setters
