@@ -15,10 +15,14 @@ import io.metadew.iesi.metadata.definition.Generation;
 import io.metadew.iesi.metadata.definition.script.Script;
 import io.metadew.iesi.metadata.repository.coordinator.RepositoryCoordinator;
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.MessageFormat;
 
 public class DesignMetadataRepository extends MetadataRepository {
+
+    private final static Logger LOGGER = LogManager.getLogger();
 
     public DesignMetadataRepository(String frameworkCode, String name, String scope, String instanceName, RepositoryCoordinator repositoryCoordinator, String repositoryObjectsPath, String repositoryTablesPath) {
         super(frameworkCode, name, scope, instanceName, repositoryCoordinator, repositoryObjectsPath, repositoryTablesPath);

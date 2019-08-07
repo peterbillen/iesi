@@ -5,6 +5,7 @@ import io.metadew.iesi.framework.definition.FrameworkInitializationFile;
 import io.metadew.iesi.framework.execution.FrameworkExecution;
 import io.metadew.iesi.framework.execution.FrameworkExecutionContext;
 import io.metadew.iesi.framework.instance.FrameworkInstance;
+import io.metadew.iesi.launch.metadata.MetadataCreate;
 import io.metadew.iesi.metadata.backup.BackupExecution;
 import io.metadew.iesi.metadata.definition.Context;
 import io.metadew.iesi.metadata.operation.MetadataRepositoryOperation;
@@ -32,8 +33,24 @@ public class MetadataLauncher {
     private static FrameworkExecution frameworkExecution;
 
     @SuppressWarnings({"unchecked", "rawtypes", "unused"})
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         ThreadContext.clearAll();
+
+        Options createOptions = new Options()
+                .addOption(Option.builder("create")
+                        .hasArg(false)
+                        .optionalArg(true)
+                        .desc("create repository")
+                        .build());
+
+        CommandLineParser createParser = new DefaultParser();
+        CommandLine cmd = createParser.parse(createOptions, args);
+
+        if (cmd.hasOption("create")) {
+            MetadataCreate metadataCreate = new MetadataCreate(args);
+            metadataCreate.run();
+        }
+
 
         Option oHelp = new Option("help", "print this message");
         Option oIni = new Option("ini", true, "define the initialization file");

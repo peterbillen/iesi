@@ -8,6 +8,8 @@ import io.metadew.iesi.framework.execution.IESIMessage;
 import io.metadew.iesi.metadata.backup.BackupExecution;
 import io.metadew.iesi.metadata.configuration.script.ScriptTraceConfiguration;
 import io.metadew.iesi.metadata.definition.script.ScriptLog;
+import io.metadew.iesi.metadata.execution.MetadataControl;
+import io.metadew.iesi.metadata.repository.MetadataRepository;
 import io.metadew.iesi.metadata.restore.RestoreExecution;
 import io.metadew.iesi.metadata.service.script.ScriptDesignTraceService;
 import org.apache.logging.log4j.*;
@@ -17,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ExecutionControl {
 
@@ -66,6 +69,7 @@ public class ExecutionControl {
         this.envName = environmentName;
 
         // Set environment variables
+        Optional<MetadataRepository> metadataRepository = MetadataControl.getInstance().getConnectivityMetadataRepository();
         this.getExecutionRuntime().setRuntimeVariablesFromList(actionExecution, this.getFrameworkExecution().getMetadataControl()
                 .getConnectivityMetadataRepository()
                 .executeQuery("select env_par_nm, env_par_val from "
